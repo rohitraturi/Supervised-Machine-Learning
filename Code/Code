@@ -1,1 +1,127 @@
+# supervised machine learning model to predict whether a cancer is benign or malignant.
+
+# step 1 - data loading
+
+# downloaded the data from UCI Machine Learning Repository
+# refer link: https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/Data
+
+# laoding the .csv file in R studio using read.csv()
+# stringsAsFactors = F restricts R from making factors for character features in the dataset
+# header = T tells the R that data file contains header otherwise R treats the header as the first instance
+brst_cancer <- read.csv("BreastCancerData.csv", stringsAsFactors = F, header = T)
+
+
+# step 2 - data exploration
+
+# checking for any NA values in the dataset using any() and is.na()
+# this is a clean data and hence has no NA values in it.
+any(is.na(cancer))
+
+# checking the dimension of the dataset
+dim(cancer) # it has 569 records and 32 features
+
+# checking the structure of the data frame
+# except for the traget feature i.e. diagnosis rest all features are numeric
+# feature ID is not a relevant feature and can be removed from the dataset
+str(cancer)
+
+# checking the count of each case type in target feature using table()
+frequency = table(cancer$diagnosis)
+frequency
+
+# checking the percentage of each case type in target feature using prop.table()
+percent <- round(prop.table(table(cancer$diagnosis))*100,2)
+percent
+
+# summarizing the target feature distribution
+prop <- data.frame(cbind(frequency = frequency, percentage = percent))
+prop
+
+# subsetting the data frame by removing the ID feature as it irrelevant to the model
+brst_cancer <- brst_cancer[,-1]
+
+# bar plots to visualize the number of cases types in target variable
+barplot( prop$frequency, xlab = 'Type of cases in target feature', ylab = 'Counts')
+barplot( prop$percentage, xlab = '% of cases in target feature', ylab = 'Percent (%)')
+
+# checking the summary of all numeric features
+summary(brst_cancer[-1])
+
+
+# step 3 - data preparation
+
+# importing library caret for data preparation
+library(caret) 
+
+# created a function to normalize the numeric features of dataset
+# function converts the features in to z standard score using mean and std deviation of the respective feature
+normalize <- function(x){
+  (x-mean(x))/sd(x)
+}
+
+# applying the normalize function to the dataset using lapply()
+brst_cancer_norm <- data.frame(lapply(brst_cancer[,-1], normalize))
+
+# creating the levels for the target feature using factor()
+brst_cancer$diagnosis <- factor(brst_cancer$diagnosis, levels = c('B','M'))
+head(brst_cancer$diagnosis, 40)
+
+# combining the diagnosis feature to the normalized dataset
+brst_cancer_norm <- cbind(brst_cancer_norm, diagnosis = brst_cancer$diagnosis)
+
+set.seed(10)
+# splitting the dataset in to train and test dataset.
+# 70% data for train and 30% for test
+index <- createDataPartition(brst_cancer_norm$diagnosis, p = 0.70, list = F)
+
+# train dataset
+train <- brst_cancer_norm[index, ]
+
+# test dataset
+test <- brst_cancer_norm[-index, ]
+
+# checking the percentage of each case type in target feature in train dataset
+round(prop.table(table(train$diagnosis))*100,2)
+
+# checking the percentage of each case type in target feature in test dataset
+round(prop.table(table(test$diagnosis))*100,2)
+
+# step 4 - model generation
+
+# checking the performance of algorithms using metric = Accuracy and cross validation method as 10-fold repeatedCV
+control <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+metric <- "Accuracy"
+
+# models
+
+# LDA
+model_lda <- train(diagnosis ~ ., data = train, method = "lda", metric = metric, trControl = control)
+model_lda
+
+# C&RT
+model_cart <- train(diagnosis ~ ., data = train, method = "rpart", metric = metric, trControl = control)
+model_cart
+
+# kNN
+model_knn <- train(diagnosis ~ ., data = train, method = "knn", metric = metric, trControl = control)
+model_knn
+
+# comparing the accuracy of each model with 10-cross repeatedCV
+result <- resamples(list(lda_model = model_lda,
+                         cart_model = model_cart,
+                         knn_model = model_knn))
+summary(result)
+
+# visually comparing the models and checking for the best fitting model
+# knn is the best fitting model
+dotplot(result)
+
+
+
+# step 5 - prediction
+# predicting the output for test datset using lda model
+predict <- predict(model_knn, newdata = test)
+
+# checking the accuracy of the model for test dataset
+confusionMatrix(predict, test$diagnosis)
 
