@@ -18,19 +18,19 @@ brst_cancer <- read.csv("BreastCancerData.csv", stringsAsFactors = F, header = T
 any(is.na(cancer))
 
 # checking the dimension of the dataset
-dim(cancer) # it has 569 records and 32 features
+dim(brst_cancer) # it has 569 records and 32 features
 
 # checking the structure of the data frame
 # except for the traget feature i.e. diagnosis rest all features are numeric
 # feature ID is not a relevant feature and can be removed from the dataset
-str(cancer)
+str(brst_cancer)
 
 # checking the count of each case type in target feature using table()
-frequency = table(cancer$diagnosis)
+frequency = table(brst_cancer$diagnosis)
 frequency
 
 # checking the percentage of each case type in target feature using prop.table()
-percent <- round(prop.table(table(cancer$diagnosis))*100,2)
+percent <- round(prop.table(table(brst_cancer$diagnosis))*100,2)
 percent
 
 # summarizing the target feature distribution
