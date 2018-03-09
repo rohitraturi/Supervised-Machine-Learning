@@ -12,16 +12,3 @@ Cons:
 Data Collection: Downloaded the data file (.csv) from the UIC repository. Refer link:https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)
 
 Data Exploration: This is a crucial step in data mining and machine learning. Data exploration means to understand the dataset and perform exploratory data analysis (EDA). Basic steps in data exploration is to check the structure and dimension of dataset. Checking for any NA(null) values in the dataset and also whether these missing values are MCAR, MAR or MNAR type. Checking data distribution and outliers in dataset. If a dataset is huge with many instances and features it’s always good to perform a detailed data exploration.
-
-
-
-
-
-
-
-
-
-
-
-
-
