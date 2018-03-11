@@ -1,4 +1,4 @@
-### Link to data file: https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/Breast%20Cancer/Data
+##### Link to data file: https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/Breast%20Cancer/Data
 
 Data Dimension: 569 Instances X 32 Attributes
 
@@ -9,13 +9,13 @@ Data Dimension: 569 Instances X 32 Attributes
 2) Diagnosis (M = malignant, B = benign) 
 
 3-32) Ten real-valued features are computed for each cell nucleus: 
-a) radius (mean of distances from center to points on the perimeter) 
-b) texture (standard deviation of gray-scale values) 
-c) perimeter 
-d) area 
-e) smoothness (local variation in radius lengths) 
-f) compactness (perimeter^2 / area - 1.0) 
-g) concavity (severity of concave portions of the contour) 
-h) concave points (number of concave portions of the contour) 
-i) symmetry 
-j) fractal dimension ("coastline approximation" - 1)
+- radius (mean of distances from center to points on the perimeter) 
+- texture (standard deviation of gray-scale values) 
+- perimeter 
+- area 
+- smoothness (local variation in radius lengths) 
+- compactness (perimeter^2 / area - 1.0) 
+- concavity (severity of concave portions of the contour) 
+- concave points (number of concave portions of the contour) 
+- symmetry 
+- fractal dimension ("coastline approximation" - 1)
