@@ -6,6 +6,7 @@ To create supervised machine learning classification models to predict whether a
 Pros
 - Can be helpful in medical field
 - Can be used as a reference by doctors
+
 Cons
 - Misclassification or Error while predicting
 - Reliability concerns
