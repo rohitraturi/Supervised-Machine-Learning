@@ -3,12 +3,12 @@
 ## Goal Statement
 To create supervised machine learning classification models to predict whether a breast cancer is benign or malignant. Following are the pros and cons associated with these models
 
--Pros
-	- Can be helpful in medical field
-	- Can be used as a reference by doctors
--Cons
-	- Misclassification or Error while predicting
-	- Reliability concerns
+Pros
+- Can be helpful in medical field
+- Can be used as a reference by doctors
+Cons
+- Misclassification or Error while predicting
+- Reliability concerns
 
 ## Data Collection
 Downloaded the dataset(.csv) from the UIC repository, [click](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic))
