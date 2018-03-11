@@ -1,8 +1,8 @@
-Link to data file: https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)
+### Link to data file: https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)
 
 Data Dimension: 569 Instances X 32 Attributes
 
-Attribute Information:
+###Attribute Information:
 
 1) ID number 
 
