@@ -1,2 +1,2 @@
-# Supervised-Machine-Learning
-supervised machine learning projects
+### Supervised Machine Learning
+supervised machine learning assignments and projects
