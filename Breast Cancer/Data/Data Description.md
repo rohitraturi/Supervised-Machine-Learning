@@ -2,13 +2,13 @@
 
 Data Dimension: 569 Instances X 32 Attributes
 
-### Attribute Information:
+##### Attribute Information:
 
 1) ID number 
 
 2) Diagnosis (M = malignant, B = benign) 
 
-3-32) Ten real-valued features are computed for each cell nucleus: 
+3) to 32) Ten real-valued features are computed for each cell nucleus: 
 - radius (mean of distances from center to points on the perimeter) 
 - texture (standard deviation of gray-scale values) 
 - perimeter 
