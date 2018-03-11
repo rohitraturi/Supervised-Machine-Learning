@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ### Link to data file: https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)
+=======
+Link to data file: https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/Breast%20Cancer/Data
+>>>>>>> 5313809a6be3972a3988b3ce0a6f494b3d30e09a
 
 Data Dimension: 569 Instances X 32 Attributes
 
