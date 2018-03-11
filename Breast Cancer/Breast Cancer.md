@@ -14,7 +14,7 @@ Downloaded the dataset(.csv) from the UIC repository, [click](https://archive.ic
 
 ## Data Loading
 Importing the dataset in to R studio
-https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/DataLoading.jpeg
+![DataLoading](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/DataLoading.png)
 
 ## Data Exploration
 Data Exploration is a crucial step in data mining and machine learning. It means to perform exploratory data analysis(EDA) to understand the dataset . Initial step in data exploration is to check the structure and summary of dataset. Structure provides the dimension of dataset alongwith the data types of each attribute. The next step is to check for any missing(NA) values in the dataset and also whether these missing values are MCAR, MAR or MNAR type. Further, is to check data distribution, outliers, and collinearity in dataset. If a dataset is huge with many instances and features it’s always good to perform a detailed data exploration.
