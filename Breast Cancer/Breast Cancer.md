@@ -16,16 +16,19 @@ Downloaded the dataset(.csv) from the UIC repository, [click](https://archive.ic
 
 ## Data Loading
 Imported the dataset in to R studio using read.csv()
+
 ![Data Loading](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/data%20loading.PNG)
 
 ## Data Exploration
 Performed Exploratory Data Analysis (EDA) on the dataset. Started with checking for any missing values in dataset followed by checking the structure and summary of dataset. Further, Used ggplot() for plotting a bar plot for the number of case type in target feature.
+
 ![Data Exploration using ggplot](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/number%20of%20cases%20in%20dataset.PNG)
 
 ![Data Exploration](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/number%20and%20percent%20of%20cases%20in%20dataset.PNG)
 
 ## Data Preparation
 Normalized the numeric features of the dataset using the Z score method. Created factors with levels as B = benign & M = malignant for target feature. Split the dataset using createDataPartition() with 70% of data goes in train and 30% goes in test. Lastly, used ggplot() for plotting the bar plots for the number of case type in train and test target feature respectively.
+
 ![Factor for Target Feature](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/creating%20factor%20for%20target%20variable.PNG)
 
 ![Number of Case in Train](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/number%20of%20cases%20in%20train%20dataset.PNG)
