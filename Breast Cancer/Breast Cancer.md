@@ -20,7 +20,9 @@ Imported the dataset in to R studio using read.csv()
 
 ## Data Exploration
 Performed Exploratory Data Analysis (EDA) on the dataset. Started with checking for any missing values in dataset followed by checking the structure and summary of dataset. Further, Used ggplot() for plotting a bar plot for the number of case type in target feature.
-![Data Exploration](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/number%20of%20cases%20in%20dataset.PNG)
+![Data Exploration using ggplot](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/number%20of%20cases%20in%20dataset.PNG)
+
+![Data Exploration](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/number%20and%20percent%20of%20cases%20in%20dataset.PNG)
 
 ## Data Preparation
 Normalized the numeric features of the dataset using the Z score method. Created factors with levels as B = benign & M = malignant for target feature. Split the dataset using createDataPartition() with 70% of data goes in train and 30% goes in test. Lastly, used ggplot() for plotting the bar plots for the number of case type in train and test target feature respectively.
@@ -37,8 +39,6 @@ Generated following three supervised machine learning models with 10-fold repeat
 - K Nearest Neighbors (kNN)
 - classification & Regression Tree (C&RT)
 
-Visually compared all the three models using dotplot() and selected the best fitting model. In this case kNN is the best fitting model.
-
 ![CV](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/10fold%20repeatedCV.PNG)
 
 ![LDA Model](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/LDA.PNG)
@@ -46,3 +46,12 @@ Visually compared all the three models using dotplot() and selected the best fit
 ![C&RT Model](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/C&RT.PNG)
 
 ![KNN Model](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/KNN.PNG)
+
+Visually compared all the three models using dotplot() and selected the best fitting model. In this case kNN is the best fitting model.
+
+![Model Comparision](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/dot%20plot%20to%20compare%20all%20three%20models.PNG)
+
+## Prediction and Model Evaluation
+Predicted the o/p for test dataset using knn model and evaluated the performance of the model using confusionMatrix()
+
+![Model Evaluation](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/confusion%20matrix%20for%20prediction%20using%20kNN%20model.PNG)
