@@ -1,21 +1,30 @@
+---
+title: "supervised machine learning model to predict type of breast cancer"
+author: "Rohit Raturi"
+date: "September 2, 2017"
+output: html_document
+---
+
+```{r}
 # supervised machine learning model to predict whether a cancer is benign or malignant.
 
 # step 1 - data loading
 
 # downloaded the data from UCI Machine Learning Repository
-# refer link: https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/Breast%20Cancer/Data
+# refer link: https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/Data
 
 # laoding the .csv file in R studio using read.csv()
 # stringsAsFactors = F restricts R from making factors for character features in the dataset
-# header = T tells the R that data file contains header otherwise R treats the header as the first instance
+# header = T tells the R that data file contains header otherwise R treats the firts instance as the header
 brst_cancer <- read.csv("BreastCancerData.csv", stringsAsFactors = F, header = T)
+
 
 
 # step 2 - data exploration
 
 # checking for any NA values in the dataset using any() and is.na()
 # this is a clean data and hence has no NA values in it.
-any(is.na(cancer))
+any(is.na(brst_cancer))
 
 # checking the dimension of the dataset
 dim(brst_cancer) # it has 569 records and 32 features
@@ -40,12 +49,15 @@ prop
 # subsetting the data frame by removing the ID feature as it irrelevant to the model
 brst_cancer <- brst_cancer[,-1]
 
-# bar plots to visualize the number of cases types in target variable
-barplot( prop$frequency, xlab = 'Type of cases in target feature', ylab = 'Counts')
-barplot( prop$percentage, xlab = '% of cases in target feature', ylab = 'Percent (%)')
+# bar plot to visualize the number of each case in target variable
+library(ggplot2)
+ggplot(data = brst_cancer, aes (x = diagnosis))+
+  geom_bar(stat = "count", aes (fill = diagnosis))+
+  labs(title = "number of cases in target variable", x = "case type", y = "counts")
 
 # checking the summary of all numeric features
 summary(brst_cancer[-1])
+
 
 
 # step 3 - data preparation
@@ -64,7 +76,7 @@ brst_cancer_norm <- data.frame(lapply(brst_cancer[,-1], normalize))
 
 # creating the levels for the target feature using factor()
 brst_cancer$diagnosis <- factor(brst_cancer$diagnosis, levels = c('B','M'))
-head(brst_cancer$diagnosis, 40)
+head(brst_cancer$diagnosis, 100)
 
 # combining the diagnosis feature to the normalized dataset
 brst_cancer_norm <- cbind(brst_cancer_norm, diagnosis = brst_cancer$diagnosis)
@@ -82,9 +94,15 @@ test <- brst_cancer_norm[-index, ]
 
 # checking the percentage of each case type in target feature in train dataset
 round(prop.table(table(train$diagnosis))*100,2)
+ggplot(data = train, aes (x = diagnosis))+
+  geom_bar(stat = "count", aes (fill = diagnosis))+
+  labs(title = "number of cases in target variable of train dataset", x = "case type", y = "counts")
 
 # checking the percentage of each case type in target feature in test dataset
 round(prop.table(table(test$diagnosis))*100,2)
+ggplot(data = test, aes (x = diagnosis))+
+  geom_bar(stat = "count", aes (fill = diagnosis))+
+  labs(title = "number of cases in target variable of test dataset", x = "case type", y = "counts")
 
 # step 4 - model generation
 
@@ -106,7 +124,7 @@ model_cart
 model_knn <- train(diagnosis ~ ., data = train, method = "knn", metric = metric, trControl = control)
 model_knn
 
-# comparing the accuracy of each model with 10-cross repeatedCV
+# comparing the accuracy of each classification model 
 result <- resamples(list(lda_model = model_lda,
                          cart_model = model_cart,
                          knn_model = model_knn))
@@ -119,8 +137,12 @@ dotplot(result)
 
 
 # step 5 - prediction
-# predicting the output for test datset using lda model
+# predicting the output for test datset using knn model
 predict <- predict(model_knn, newdata = test)
 
 # checking the accuracy of the model for test dataset
 confusionMatrix(predict, test$diagnosis)
+
+
+```
+
