@@ -16,7 +16,7 @@ In caret, I split the data using createDataPartition() and the advantage is that
 ### Model with 5fold CV
 Further, I also added 5-fold CV while making the model. Cross-Validation helps to understand that how the model will perform before implementing it. There are many CV methods like k-fold CV, repeated CV, LOCV, Hold-Out CV, Bootstrap.
 
-![5fold CV](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/Assignments/Assignment3/Snapshots/5fold%20CV.PNG)
+![5fold CV](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Assignments/Assignment3/Snapshots/5fold%20CV.PNG)
 
 ![optimize k value](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/Assignments/Assignment3/Snapshots/optimize%20k%20value.PNG)
 
