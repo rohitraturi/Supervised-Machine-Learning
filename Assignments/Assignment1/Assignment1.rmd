@@ -1,0 +1,102 @@
+---
+title: "Assignment 1"
+author: "Rohit Raturi"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r, warning=FALSE}
+#1
+# Loading data in R using read.csv and stringsAsFactors = F
+data <- read.csv("customertxndata.csv", stringsAsFactors = F)
+
+#2
+
+# nrow() to check total cases
+total_number_of_cases <- nrow(data)
+total_number_of_cases
+
+# mean() to calculate mean of the feature and na.rm = T to exclude the NA values
+mean_number_of_visits <- mean(data$Visits, na.rm = T)
+mean_number_of_visits
+
+# median() to calculate median of the feature and na.rm = T to exclude the NA values
+median_revenue <- median(data$Revenue, na.rm = T)
+median_revenue
+
+# max() to check the maximum value in a feature and na.rm = T to exclude the NA values
+maximum_number_of_transactions <- max(data$Transactions, na.rm = T)
+maximum_number_of_transactions
+
+# min() to check the minimum value in a feature and na.rm = T to exclude the NA values
+minimum_number_of_transactions <- min(data$Transactions, na.rm = T)
+minimum_number_of_transactions
+
+# table() to check the count for each type in OS feature
+most_common_OS <- table(data$OS)
+most_common_OS
+
+#3
+library(ggplot2)# Loading library ggplot2 for creating visualization
+# Plotted Visits on X and Revenue on Y to generate the scattter plot to visualize the correlation between Visits and Revenue
+ggplot(data = data, aes(x = Visits, y = Revenue))+
+  geom_point()
+# There is a positive correlation between number of visits and revenue
+# More the visits more will be the revenue
+
+# Calculating the correlation value between Visits and Revenue
+cor(data$Visits, data$Revenue)
+
+#4
+any(is.na(data)) # Checking if there is any NA value in dataset
+# Using colnames() to find the column names that have missing values
+colnames(is.na(data))
+
+# Missing values can be of type MCAR, MAR and MNAR
+# There are multiple ways of imputation using mean, median or regression
+
+#5
+summary(data$Transactions) # Checking summary statistics of Transactions
+# Transactions have 1800 NA values
+data$Transactions[is.na(data$Transactions)] = median(data$Transactions, na.rm = TRUE)
+
+# Checking the count for each type in Gender feature
+table(data$Gender, exclude = 'null')
+# Gender have 5400 NA values
+if(data$Transactions == 0 && is.na(data$Gender)) {
+  data$Gender[is.na(data$Gender)] = "Male"
+} else {
+    data$Gender[is.na(data$Gender)] = "Female"
+    }
+
+#6
+library(sqldf) # Loading library sqldf to use SQL in R
+data$ID <- 1:nrow(data) # Created a dummy column as ID incremented from 1 to 22800
+# Putting all even values in training_dataset using sqldf()
+training_dataset <- sqldf("select * from data where ID % 2 = 0")
+head(training_dataset[-6,],30)
+
+# Putting all odd values in validation_dataset using sqldf()
+validation_dataset <- sqldf("select * from data where ID % 2 != 0")
+head(validation_dataset[-6,],30)
+
+#7
+mean(training_dataset$Revenue)
+
+mean(validation_dataset$Revenue)
+
+# Mean Revenue of training dataset is more than validation dataset
+# Even number of records generates more Revenue than odd records
+
+#8
+library(caret) # Loading library caret for creating partition in the dataset
+# Split the data in to two parts with 50% in each part using createDataPartition()
+index <- createDataPartition(data$Visits, p = 0.5, list = F)
+# one part of the values goes in training
+training <- data[index, ]
+# other part of the values goes in validation
+validation <- data[-index, ]
+
+```
+
