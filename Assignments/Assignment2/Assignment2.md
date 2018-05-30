@@ -8,6 +8,7 @@ This assignment does not require the use of any forecasting packages. Instead wr
 3 - Based on the data on the growth of mobile phone use in Brazil (you'll need to copy the data and create a CSV that you can load into R), forecast phone use for 2017 using a simple moving average, a 3-year weighted moving average (with weights of 4 for the most recent year, and 1 for the others), exponential smoothing (alpha of 0.2), and linear regression trendline.
 
 4 - Calculate the average mean squared error for each model, i.e., use the model to calculate a forecast for each given time period and then the error.
+
 5 - Which model has the smallest mean squared error (MSE)?
 
 6 - Calculate a weighted average forecast by averaging out the three forecasts calculated in (3) with the following weights: 3 for trend line, 2 for exponential smoothing, 1 for weighted moving average. Remember to divide by the sum of the weights in a weighted average.
