@@ -3,9 +3,9 @@
 ### Data split
 In caret, I split the data using createDataPartition() and the advantage is that it splits the each class with almost same proportion for both train and test datasets as it is there in the main dataset. In both train and test datasets, I got 38% of B and 62% of M which is same for the main dataset (before splitting)
 
-![ggplot for dataset](https://github.com/rohitraturi/Supervised-Machine Learning/tree/master/Assignments/Assignment3/Snapshots/ggplot%20for%20dataset.PNG)
+![ggplot for dataset](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/Assignments/Assignment3/Snapshots/ggplot%20for%20dataset.PNG)
 
-![ggplot for train dataset](https://github.com/rohitraturi/Supervised-Machine Learning/tree/master/Assignments/Assignment3/Snapshots/ggplot%20for%20train%20dataset.PNG)
+![ggplot for train dataset](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/Assignments/Assignment3/Snapshots/ggplot%20for%20train%20dataset.PNG)
 
 ![ggplot for test dataset](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/Assignments/Assignment3/Snapshots/ggplot%20for%20test%20dataset.PNG)
 
