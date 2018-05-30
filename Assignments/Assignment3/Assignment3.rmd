@@ -1,0 +1,130 @@
+---
+title: "Assignment3"
+author: "Rohit Raturi"
+output: html_document
+---
+
+```{r, warning=FALSE}
+#Step1 - Data Loading
+# Loading data in R using read.csv()
+data <- read.csv("prostate_cancer.csv", stringsAsFactors = F)
+
+#Step2 - Data Exploration and Preparation
+# Checking the structure of dataset
+# It has 100 records and 10 features
+str(data)
+
+# Removing id feature since it is an incremntal value to keep the tab of number of records in dataset
+# It does not have any significant impact on the machine learning model
+data <- data[ ,-1]
+
+# Creating factors for the diagnosis_result feature with levels as B and M
+data$diagnosis_result <- factor(data$diagnosis_result,labels = c('B','M') ,levels = c('B','M'))
+data$diagnosis_result
+
+# Setting the seed value to 1
+set.seed(1)
+
+# Checking the frequency of each type of diagnosis_result in the dataset using table()
+table(data$diagnosis_result)
+
+library(ggplot2) # Laoding ggplot2 for creating bar plot
+ggplot(data, aes(x = diagnosis_result))+
+  geom_bar(aes(fill = diagnosis_result))+
+  theme_classic()
+
+# Created a function to normalize the numeric feature using Z score method
+Normalize <- function(x){
+  (x - mean(x))/sd(x)
+}
+
+# Applying the function to the numeric features of the dataset using lapply()
+data_norm <- as.data.frame(lapply(data[2:9], Normalize))
+data_norm <- cbind(data_norm, data["diagnosis_result"])
+
+summary(data_norm[-9])
+
+# Created a random split using sample() with 75% and 25%
+index <- sample(100,75)
+
+# 75% data goes to training
+train <- data_norm[index, ]
+
+# Checking the frequency of each type of diagnosis_result in the train dataset
+round(prop.table(table(train$diagnosis_result)),2)*100
+
+ggplot(train, aes(x = diagnosis_result))+
+  geom_bar(aes(fill = diagnosis_result))+
+  theme_classic()
+
+# 25% balance data goes to testing or validation
+test <- data_norm[-index, ]
+
+# Checking the frequency of each type of diagnosis_result in the test dataset
+round(prop.table(table(test$diagnosis_result)),2)*100
+
+ggplot(test, aes(x = diagnosis_result))+
+  geom_bar(aes(fill = diagnosis_result))+
+  theme_classic()
+
+# Createing training lables for training the model
+train_label <- data_norm[index,9]
+
+# Creating testing lables to evaluate the model later
+test_label <- data_norm[-index,9]
+
+#Step3 Supervised Machine Learning k-NN Model using class package
+library(class) # Loading library class
+
+# Making the k-NN model using class package and k = sqrt(nrow(data)) = 10
+model_class <- knn(train = train[,-9], test = test[,-9], cl = train_label, k = 10)
+
+#Step3 Supervised Machine Learning k-NN Model using caret package
+library(caret)
+
+# Created a random split using createDataPartition() with 75% and 25%
+split <- createDataPartition(data$diagnosis_result, p = 0.75, list = F)
+
+# 75% data goes to training the model
+training <- data_norm[split, ]
+
+# Checking the frequency of each type of diagnosis_result in the training dataset
+round(prop.table(table(training$diagnosis_result)),2)*100
+
+ggplot(training, aes(x = diagnosis_result))+
+  geom_bar(aes(fill = diagnosis_result))+
+  theme_classic()
+
+# 25% data goes for the model evaluation
+testing <- data_norm[-split, ]
+
+# Checking the frequency of each type of diagnosis_result in the testing dataset
+round(prop.table(table(testing$diagnosis_result)),2)*100
+
+ggplot(testing, aes(x = diagnosis_result))+
+  geom_bar(aes(fill = diagnosis_result))+
+  theme_classic()
+
+# Creating a 5 fold cv for training the model
+ctrl <- trainControl(method = "cv", number = 5)
+
+# Making the k-NN model using caret package and it finds the optimized k value for the model
+model_caret <- train(diagnosis_result ~., data = training, method = "knn", metric = "Accuracy", trControl = ctrl)
+model_caret
+# Plotting the model to visualize the optimize k value
+plot(model_caret)
+
+# Predicting the results for testing dataset using the model
+predict_caret <- predict(model_caret, newdata = testing)
+
+# Model Evaluation
+library(gmodels) # Loading library gmodels for creating confusion matrix
+
+# Confusion Matrix for model_class
+confusionMatrix(model_class,test_label)
+
+# Confusion Matrix for model_caret
+confusionMatrix(predict_caret,testing$diagnosis_result)
+
+```
+
