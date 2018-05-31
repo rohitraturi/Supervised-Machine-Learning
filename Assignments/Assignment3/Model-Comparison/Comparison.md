@@ -18,6 +18,8 @@ In caret, splitting the data is somewhat simple and more accurate with the propo
 ### Model with 5fold CV
 In caret there is an option to add CV in the model making to check the model performance beforehand. I have used k-fold CV with k = 5 for making the model. Cross-Validation helps to understand that how the model will perform before implementing it. There are many CV methods like k-fold CV, repeated CV, LOCV, Hold-Out CV, Bootstrap.
 
+Beyond that, caret automatically selects the optimize k value for the model and in my case the k-nearest neighbors are 5 i.e k = 5
+
 ![5fold CV](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Assignments/Assignment3/Model-Comparison/5fold%20CV.png)
 
 ![optimize k value](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Assignments/Assignment3/Model-Comparison/optimize%20k%20value.png)
