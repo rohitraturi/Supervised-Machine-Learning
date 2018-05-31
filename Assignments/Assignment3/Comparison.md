@@ -2,6 +2,7 @@
 
 ### Data split
 In class, I have used sample() to split the data in train and test. The sample() just splits the data with the mentioned number of records. Here, I have mentioned as sample(100,75) which means to take 75 records out of 100 records and I have assigned that 75 records to train and balance 25 records to test. 
+
 In caret, I split the data using createDataPartition() and the advantage is that it splits the each class within the feature with almost same proportion for both train and test datasets as it is there in the main dataset. In both train and test datasets, I got 38% of B and 62% of M which is same for the main dataset (before splitting)
 
 ![ggplot for dataset](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/Assignments/Assignment3/Snapshots/ggplot%20for%20dataset.PNG)
