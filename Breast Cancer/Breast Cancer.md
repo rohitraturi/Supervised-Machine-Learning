@@ -17,44 +17,48 @@ Downloaded the dataset(.csv) from the UIC repository, [click](https://archive.ic
 ## Data Loading
 Imported the dataset in to R studio using read.csv()
 
-![Data Loading](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/data%20loading.PNG)
+![Data Loading](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/dataloading.PNG)
 
 ## Data Exploration
-Performed Exploratory Data Analysis (EDA) on the dataset. Started with checking for any missing values in dataset followed by checking the structure and summary of dataset. Further, Used ggplot() for plotting a bar plot for the number of case type in target feature.
+Performed Exploratory Data Analysis (EDA) on the dataset. EDA to understand the data and to find the insight about the data. I Started with checking for any NA values in dataset followed by checking the structure and summary of dataset. I also used ggplot() for creating visualization for supporting my EDA.
 
-![Data Exploration using ggplot](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/number%20of%20cases%20in%20dataset.PNG)
+![Exploratory Data Analysis](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/eda.PNG)
 
-![Data Exploration](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/number%20and%20percent%20of%20cases%20in%20dataset.PNG)
+![Exploratory Data Analysis Contd](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/eda1.PNG)
+
+![Visualization](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/barplot.PNG)
 
 ## Data Preparation
-Normalized the numeric features of the dataset using the Z score method. Created factors with levels as B = benign & M = malignant for target feature. Split the dataset using createDataPartition() with 70% of data goes in train and 30% goes in test. Lastly, used ggplot() for plotting the bar plots for the number of case type in train and test target feature respectively.
+This is a very important stage in machine learning. More the prepared data better the model. I started with normalizing the numeric features of the dataset using the Z score method. Later, I Created factors with levels as B = benign & M = malignant for target feature.I also split the dataset using createDataPartition() with 70% of data goes in training the model and 30% goes in evaluating the model. Lastly, used ggplot() for plotting the bar plots and creating the visualization
 
-![Factor for Target Feature](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/creating%20factor%20for%20target%20variable.PNG)
+![Data Preparation](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/dataprep.PNG)
 
-![Number of Case in Train](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/number%20of%20cases%20in%20train%20dataset.PNG)
+![Data Split](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/datasplit.PNG)
 
-![Number of Case in Test](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/number%20of%20cases%20in%20test%20dataset.PNG)
+![Visualization](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/train.PNG)
+
+![Visualization](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/test.PNG)
 
 ## Supervised Machine Learning Models
-Generated following three supervised machine learning models with 10-fold repeatedCV and metric = "Accuracy".
+Generated following three supervised machine learning models with 10-fold repeated CV and metric = "Accuracy".
 
 - Linear Discriminant Analysis (LDA)
 - K Nearest Neighbors (kNN)
 - classification & Regression Tree (C&RT)
 
-![CV](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/10fold%20repeatedCV.PNG)
+![LDA Model](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/ldamodel.PNG)
 
-![LDA Model](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/LDA.PNG)
+![C&RT Model](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/cartmodel.PNG)
 
-![C&RT Model](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/C&RT.PNG)
-
-![KNN Model](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/KNN.PNG)
+![KNN Model](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/knnmodel.PNG)
 
 Visually compared all the three models using dotplot() and selected the best fitting model. In this case kNN is the best fitting model.
 
-![Model Comparision](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/dot%20plot%20to%20compare%20all%20three%20models.PNG)
+![Model Comparision](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/modelcomparison.PNG)
+
+![Dot Plot](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/dotplot.PNG)
 
 ## Prediction and Model Evaluation
 Predicted the o/p for test dataset using knn model and evaluated the performance of the model using confusionMatrix()
 
-![Model Evaluation](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/confusion%20matrix%20for%20prediction%20using%20kNN%20model.PNG)
+![Model Evaluation](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/Breast%20Cancer/Analysis/predict.PNG)
