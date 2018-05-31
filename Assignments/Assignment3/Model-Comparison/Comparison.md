@@ -1,7 +1,7 @@
 ## Comparison between class and caret packages
 
 ### Splitting the Data
-In class, I have used sample() to split the data into train and test datasets. Sample() takes input as the total number of recirds and number of records we want to split. In my case 75% or 75 records will go for test and hence I have used sample(100,75) which means 75 records out of 100 will be used for train the model and balance 25 for evaluate the model
+In class, I have used sample() to split the data into train and test datasets. Sample() takes input as the total number of recirds and number of records we want to split. In my case 75% or 75 records will go for test and hence I have used sample(100,75) which means 75 records out of 100 will be used for train the model and balance 25 to evaluate the model
 
 In caret, splitting the data is somewhat simple and more accurate with the proportion of each case in the split. I split the data using createDataPartition() and the advantage is that it splits the each class with almost same proportion for both train and test datasets as it is there in the main dataset. In both train and test datasets, I got 38% of B and 62% of M which is same for the main dataset (before splitting)
 
