@@ -3,7 +3,7 @@
 Created a naive bayes classifier to classify an incoming message as spam or ham. This will be helpful to filter out the spam messages.
 
 ## Data Collection
-[click here to see the dataset](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/SMS%20Classifier/spam.csv)
+[click here to view the dataset](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/SMS%20Classifier/spam.csv)
 
 ## Summary
 - Imported the dataset in to R studio using read.csv() and created the headers using colnames()
