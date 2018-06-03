@@ -16,7 +16,7 @@ Created a naive bayes classifier to classify an incoming message as spam or ham.
 - Removed the words from the DTM which have a count of less than 6 i.e. approximately 0.1% of the dataset. Subsetted the training and testing dtms and converted the numbers (1,0) to (Yes,No) respectively using ifelse()
 - Generated a navie bayes classifier using e1071() and with lapalace = 1. Predicted the output for the testing dataset and used confusionMatrix() to check the accuracy and output
 
-## Images
+## Code Images
 
 ![Data Loading](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/SMS%20Classifier/Analysis/dataloading.PNG)
 
