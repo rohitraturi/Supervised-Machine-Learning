@@ -18,22 +18,22 @@ Created a naive bayes classifier to classify an incoming message as spam or ham.
 
 ## Images
 
-![Data Loading](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/SMS%20Classifier/Analysis/dataloading.PNG)
+![Data Loading](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/SMS%20Classifier/Analysis/dataloading.PNG)
 
-![Corpus](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/SMS%20Classifier/Analysis/corpus.PNG)
+![Corpus](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/SMS%20Classifier/Analysis/corpus.PNG)
 
-![Corpus cleaning](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/SMS%20Classifier/Analysis/corpuscleaning.PNG)
+![Corpus cleaning](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/SMS%20Classifier/Analysis/corpuscleaning.PNG)
 
-![DTM](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/SMS%20Classifier/Analysis/dtm.PNG)
+![DTM](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/SMS%20Classifier/Analysis/dtm.PNG)
 
-![Data Partition](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/SMS%20Classifier/Analysis/datapartition.PNG)
+![Data Partition](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/SMS%20Classifier/Analysis/datapartition.PNG)
 
-![Frequent Words](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/SMS%20Classifier/Analysis/freqwords.PNG)
+![Frequent Words](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/SMS%20Classifier/Analysis/freqwords.PNG)
 
-![Word Cloud](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/SMS%20Classifier/Analysis/wc.PNG)
+![Word Cloud](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/SMS%20Classifier/Analysis/wc.PNG)
 
-![WC Spam](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/SMS%20Classifier/Analysis/wcspam.PNG)
+![WC Spam](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/SMS%20Classifier/Analysis/wcspam.PNG)
 
-![WC Ham](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/SMS%20Classifier/Analysis/wcham.PNG)
+![WC Ham](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/SMS%20Classifier/Analysis/wcham.PNG)
 
-![Model](https://github.com/rohitraturi/Supervised-Machine-Learning/tree/master/SMS%20Classifier/Analysis/model.PNG)
+![Model](https://github.com/rohitraturi/Supervised-Machine-Learning/blob/master/SMS%20Classifier/Analysis/model.PNG)
