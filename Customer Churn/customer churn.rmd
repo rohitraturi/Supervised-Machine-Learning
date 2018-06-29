@@ -1,0 +1,330 @@
+---
+title: "Customer Churn"
+author: "Rohit Raturi"
+output: html_document
+---
+
+```{r setup, warning = FALSE}
+# Data Loading
+# used read.csv() to load the data in to R Studio
+data <- read.csv('WA_Fn-UseC_-Telco-Customer-Churn.csv', stringsAsFactors = F)
+
+# Data Exploration & Preprocessing
+# Checking the structure and dimension of the dataset
+# dataset has 7043 observations and 21 features
+str(data)
+
+# proportion of case types in churn
+round(prop.table(table(data$Churn))*100,1)
+
+# checking for any NA values in the dataset
+# it has NA values associated with it
+any(is.na(data))
+
+# column(s) which have NA values
+# only 'TotalCharges' has missing values
+colnames(data)[colSums(is.na(data))>0]
+
+# function to check the number of missing values in each column
+na <- function(x){
+  sum(is.na(x))
+}
+
+# applying function to dataset
+# 'TotalCharges' has 11 missing values
+sapply(data, na)
+
+# removing the observation with NA values since there are only 11 which is approximately 0.1% of the total observations.
+# used complete.cases() to remove the NA values from the dataset
+data <- data[complete.cases(data), ]
+
+# again checking to confirm whether the NA values has been removed or not
+any(is.na(data))
+
+# loading library ggplot2 for creating visulaization for understanding the data
+library(ggplot2)
+
+# barpolot for the male and female cases in the dataset
+# its almost the same with male percentage slightly higher than female percentage
+ggplot(data, aes(x = gender))+
+  geom_bar(aes(fill = gender))+
+  labs(title = 'Customer Gender', x = 'Gender Type', y = 'Count')+
+  theme_classic()
+
+# there are approximately 17% senior citizen in the dataset
+round(prop.table(table(data$SeniorCitizen))*100,1)
+
+# there are feewer customer with partners as compared to customer with no partners
+ggplot(data, aes(x = Partner))+
+  geom_bar(aes(fill = Partner))+
+  labs(title = 'Number of Customer with Partners', x = 'Partner', y = 'Count')+
+  theme_classic()
+
+# there are approximately 30% dependents
+ggplot(data, aes(x = Dependents))+
+  geom_bar(aes(fill = Dependents))+
+  labs(title = 'Customer with Dependents', x = 'Dependent', y = 'Count')+
+  theme_classic()
+
+# 90% of customers have phone service
+ggplot(data, aes(x = PhoneService))+
+  geom_bar(aes(fill = PhoneService))+
+  labs(title = 'Customer having a Phone Service', x = 'Phone Service', y = 'Count')+
+  theme_classic()
+
+# 42% customers have multiple lines while approx 10% of customers do not have a phone service
+round(prop.table(table(data$MultipleLines))*100,1)
+
+# about 22% customers do not have an internet service whereas 44% have fibre optics and balance 34% has DSL
+round(prop.table(table(data$InternetService))*100,1)
+
+ggplot(data, aes(x = Contract))+
+  geom_bar(aes(fill = Contract))+
+  labs(title = 'Contract type by the Customer', x = 'Contract Type', y = 'Count')+
+  theme_classic()
+
+# around 3000 customers did not opt for paperless billing method
+ggplot(data, aes(x = PaperlessBilling))+
+  geom_bar(aes(fill = PaperlessBilling))+
+  labs(title = 'Customer opted for Paperless Billing Service', x = 'Paperless Billing', y = 'Count')+
+  theme_classic()
+
+# many customers have opted for electronic check payment method
+ggplot(data, aes(x = PaymentMethod))+
+  geom_bar(aes(fill = PaymentMethod))+
+  labs(title = 'Payment Method opted by Customers', x = 'Payemnt Method Type', y = 'Count')+
+  theme_classic()
+
+# loading libraru plyr for data wrangling
+library(plyr)
+
+# converting the 'No internet service' to 'No' for the following features in the dataset
+data$OnlineSecurity <- as.factor(mapvalues(data$OnlineSecurity, 
+                                           from = c("No internet service"),
+                                           to = c("No")))
+
+data$OnlineBackup <- as.factor(mapvalues(data$OnlineBackup, 
+                                           from = c("No internet service"),
+                                           to = c("No")))
+
+data$DeviceProtection <- as.factor(mapvalues(data$DeviceProtection, 
+                                           from = c("No internet service"),
+                                           to = c("No")))
+
+data$TechSupport <- as.factor(mapvalues(data$TechSupport, 
+                                           from = c("No internet service"),
+                                           to = c("No")))
+
+data$StreamingTV <- as.factor(mapvalues(data$StreamingTV, 
+                                        from = c("No internet service"),
+                                        to = c("No")))
+
+data$StreamingMovies <- as.factor(mapvalues(data$StreamingMovies, 
+                                        from = c("No internet service"),
+                                        to = c("No")))
+
+data$SeniorCitizen <- as.factor(mapvalues(data$SeniorCitizen, 
+                                            from = c(0,1),
+                                            to = c("No", "Yes")))
+
+# almost 5000 customers do not have an online security
+ggplot(data, aes(x = OnlineSecurity))+
+  geom_bar(aes(fill = OnlineSecurity))+
+  labs(title = 'Customer with Online Security', x = 'Online Security', y = 'Count')+
+  theme_classic()
+
+# almost 2/3 of customers do not have an online backup
+ggplot(data, aes(x = OnlineBackup))+
+  geom_bar(aes(fill = OnlineBackup))+
+  labs(title = 'Customer with Online Backup', x = 'Online Backup', y = 'Count')+
+  theme_classic()
+
+# almost 2/3 of customers do not have a device protection
+ggplot(data, aes(x = DeviceProtection))+
+  geom_bar(aes(fill = DeviceProtection))+
+  labs(title = 'Customer with Device Protection', x = 'Device Protection', y = 'Count')+
+  theme_classic()
+
+# almost 5000 customers do not have a tech support
+ggplot(data, aes(x = TechSupport))+
+  geom_bar(aes(fill = TechSupport))+
+  labs(title = 'Customer with Tech Support', x = 'Tech Support', y = 'Count')+
+  theme_classic()
+
+# more than 4000 customers do not have streming movies
+ggplot(data, aes(x = StreamingMovies))+
+  geom_bar(aes(fill = StreamingMovies))+
+  labs(title = 'Customer with Streaming Movies', x = 'Streaming Movies', y = 'Count')+
+  theme_classic()
+
+# more than 4000 customers do not have streming tv
+ggplot(data, aes(x = StreamingTV))+
+  geom_bar(aes(fill = StreamingTV))+
+  labs(title = 'Customer with Streaming TV', x = 'Streaming TV', y = 'Count')+
+  theme_classic()
+
+# distrbution of Total Charges
+# it is right skewed
+ggplot(data, aes(x = scale(TotalCharges)))+
+  geom_density(kernel = "gaussian")+
+  labs(title = 'Distribution of Total Charges', x = 'Normalized Value of Total Charges', y = 'Density')+
+  theme_classic()
+
+# checking summary of tenure feature
+# min = 1 month and max is 72 months
+summary(data$tenure)
+
+# created a function to group tenure values in to the years
+tenure_group <- function(x){
+  if (x >= 0 & x <= 12){
+    return('0-1 Year')
+  }else if(x > 12 & x <= 24){
+    return('1-2 Year')
+  }else if (x > 24 & x <= 36){
+    return('2-3 Year')
+  }else if (x > 36 & x <= 48){
+    return('3-4 Year')
+  }else if (x > 48 & x <= 60){
+    return('4-5 Year')
+  }else if (x > 60 & x <= 72){
+    return('5-6 Year')
+  }
+}
+
+# applying the function to the tenure feature
+tenure_group <- sapply(data$tenure, tenure_group)
+
+# adding the tenure_group feature to the dataste
+data$tenure_group <- tenure_group
+
+# creating the factors
+data$tenure_group <- as.factor(data$tenure_group)
+
+# checking the proportion of each tenure group in dataset
+round(prop.table(table(tenure_group))*100,1)
+
+
+# Model making and evaluation
+# loading library caret for data partition and model generation
+library(caret)
+
+# subsetting the dataset by removing CustomerID and tenure features
+data <- data[,c(-1,-6)]
+
+# converting the feature churn to factor for model generation
+data$Churn <- as.factor(data$Churn)
+
+# created index for data partition with 80% data wiull go in training the model and 20% in testing and validating the model
+set.seed(100)
+index <- createDataPartition(data$Churn, p = 0.8, list = F)
+
+# train dataset
+train <- data[index, ]
+dim(train)
+round(prop.table(table(train$Churn))*100,1)
+
+# test dataset
+test <- data[-index, ]
+dim(test)
+round(prop.table(table(test$Churn))*100,1)
+
+library(glm2)
+library(MASS)
+
+# backwards stepwise elimination for feature selection
+model <- glm(Churn ~ ., family = binomial, data = data)
+backwards <- step(model, direction = "backward")
+
+# selected the following model with Step:  AIC=5893.4
+# Churn ~ SeniorCitizen + Dependents + MultipleLines + InternetService + OnlineSecurity + TechSupport + StreamingTV + StreamingMovies + Contract + PaperlessBilling + PaymentMethod + TotalCharges + tenure_group
+
+# Logistic Regression Model
+lg_model <- train(Churn ~ SeniorCitizen + Dependents + MultipleLines + InternetService +
+                  OnlineSecurity + TechSupport + StreamingTV + StreamingMovies + Contract +
+                  PaperlessBilling + PaymentMethod + TotalCharges + tenure_group, 
+                  data = train, method = 'glm', metric = 'Accuracy')
+
+# checking the logistic regression model
+lg_model
+
+# validating the model using test dataset
+lg_predict <- predict(lg_model, newdata = test)
+
+# checking first 30 predicted values
+head(lg_predict,30)
+
+# checking the model accuracy for the predicted values
+accuracy_lg_model <- mean(lg_predict == test$Churn)
+accuracy_lg_model
+
+
+# Decision Tree Model
+dt_model <- train(Churn ~ SeniorCitizen + Dependents + MultipleLines + InternetService +
+                    OnlineSecurity + TechSupport + StreamingTV + StreamingMovies + Contract +
+                    PaperlessBilling + PaymentMethod + TotalCharges + tenure_group, 
+                  data = train, method = 'rpart', metric = 'Accuracy')
+
+# checking the decision tree model
+dt_model
+
+# validating the model using test dataset
+dt_predict <- predict(dt_model, newdata = test)
+
+# checking first 30 predicted values
+head(dt_predict,30)
+
+# checking the model accuracy for the predicted values
+accuracy_dt_model <- mean(dt_predict == test$Churn)
+accuracy_dt_model
+
+# SVM Model
+svm_model <- train(Churn ~ SeniorCitizen + Dependents + MultipleLines + InternetService +
+                    OnlineSecurity + TechSupport + StreamingTV + StreamingMovies + Contract +
+                    PaperlessBilling + PaymentMethod + TotalCharges + tenure_group, 
+                  data = train, method = 'svmLinear', metric = 'Accuracy')
+
+# checking the svm model
+svm_model
+
+# validating the model using test dataset
+svm_predict <- predict(svm_model, newdata = test)
+
+# checking first 30 predicted values
+head(svm_predict,30)
+
+# checking the model accuracy for the predicted values
+accuracy_svm_model <- mean(svm_predict == test$Churn)
+accuracy_svm_model
+
+# Random Forest Model
+rf_model <- train(Churn ~ SeniorCitizen + Dependents + MultipleLines + InternetService +
+                    OnlineSecurity + TechSupport + StreamingTV + StreamingMovies + Contract +
+                    PaperlessBilling + PaymentMethod + TotalCharges + tenure_group, 
+                  data = train, method = 'rf', metric = 'Accuracy')
+
+# checking the decision tree model
+rf_model
+
+# validating the model using test dataset
+rf_predict <- predict(rf_model, newdata = test)
+
+# checking first 30 predicted values
+head(rf_predict,30)
+
+# checking the model accuracy for the predicted values
+accuracy_rf_model <- mean(rf_predict == test$Churn)
+accuracy_rf_model
+
+# comparing the result of all four models
+result <- resamples(list(glm = lg_model, cart = dt_model, svm = svm_model, rf = rf_model ))
+summary(result)
+
+# visually comparing the models 
+# glm is the best fitting model
+dotplot(result)
+
+# ConfusionMatrix for glm model
+confusionMatrix(lg_predict, test$Churn)
+
+```
+
